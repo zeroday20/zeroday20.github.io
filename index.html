@@ -7,92 +7,91 @@
 
 <style>
 :root {
-  --bg: #060606;
+  --bg: #050505;
   --red: #8b0000;
-  --dark-red: #4b0000;
+  --dark-red: #4a0000;
+  --text: #b0b0b0;
 }
 
+/* reset */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+/* body */
 body {
-  margin: 0;
-  font-family: monospace;
   background: var(--bg);
-  color: var(--red);
+  color: var(--text);
+  font-family: "Courier New", Courier, monospace;
+  height: 100vh;
   overflow: hidden;
 }
 
+/* matrix canvas */
 canvas {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 0;
 }
 
+/* main box */
 .container {
   position: relative;
   z-index: 1;
-  max-width: 420px;
-  margin: auto;
-  margin-top: 15vh;
+  width: 420px;
+  margin: 15vh auto;
+  padding: 40px;
   text-align: center;
   border: 1px solid var(--red);
-  padding: 40px;
   background: rgba(5,5,5,0.95);
-  box-shadow: 0 0 30px var(--dark-red);
+  box-shadow: 0 0 35px var(--dark-red);
 }
 
+/* title */
 h1 {
-  font-size: 2.8em;
-  margin: 0;
-  position: relative;
+  font-size: 3rem;
+  letter-spacing: 4px;
+  color: var(--red);
+  margin-bottom: 15px;
+  font-weight: 900;
 }
 
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  opacity: 0.7;
-}
-
-.glitch::before {
-  color: var(--dark-red);
-  transform: translate(-2px, -2px);
-}
-
-.glitch::after {
-  color: #ff1a1a;
-  transform: translate(2px, 2px);
-}
-
+/* divider */
 .line {
-  width: 60px;
+  width: 70px;
   height: 2px;
   background: var(--red);
   margin: 20px auto;
 }
 
+/* text */
 p {
-  color: #aaa;
-  margin: 10px 0;
+  font-size: 0.95rem;
+  margin: 8px 0;
+  color: #a0a0a0;
 }
 
 .about {
-  font-size: 0.9em;
-  color: #888;
+  font-size: 0.85rem;
+  color: #7a7a7a;
+  margin-top: 10px;
+}
+
+/* links */
+.links {
+  margin-top: 25px;
 }
 
 .links a {
-  display: inline-block;
-  margin: 10px;
   text-decoration: none;
   color: var(--red);
   border: 1px solid var(--red);
-  padding: 6px 14px;
-  transition: 0.3s;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: 0.25s ease;
 }
 
 .links a:hover {
@@ -100,9 +99,10 @@ p {
   color: #000;
 }
 
+/* footer */
 footer {
-  margin-top: 15px;
-  font-size: 0.8em;
+  margin-top: 25px;
+  font-size: 0.75rem;
   color: #555;
 }
 </style>
@@ -113,18 +113,18 @@ footer {
 <canvas id="matrix"></canvas>
 
 <div class="container">
-  <h1 class="glitch" data-text="ZeroHack">ZeroHack</h1>
+  <h1>ZEROHACK</h1>
   <div class="line"></div>
 
   <p>Cyber Security • Linux • Red Team</p>
 
   <div class="about">
-    Focused on low-level systems, exploitation, and clean code.
+    Focused on low-level systems,<br>
+    exploitation, and clean code.
   </div>
 
   <div class="links">
-    <a href="https://github.com/zeroday20" target="_blank">GitHub</a>
-    <a href="#" title="Add later">Contact</a>
+    <a href="https://github.com/zeroday20" target="_blank">GITHUB</a>
   </div>
 
   <footer>zeroday20</footer>
@@ -137,30 +137,30 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const letters = "010101010101";
+const chars = "01";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
-const drops = Array.from({ length: columns }).fill(1);
+const drops = Array(Math.floor(columns)).fill(1);
 
 function draw() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "#8b0000";
   ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
+    const text = chars[Math.floor(Math.random() * chars.length)];
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
       drops[i] = 0;
-
+    }
     drops[i]++;
   }
 }
 
-setInterval(draw, 50);
+setInterval(draw, 45);
 </script>
 
 </body>

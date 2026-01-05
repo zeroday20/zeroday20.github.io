@@ -1,11 +1,77 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>ZeroDay20</title>
+<meta charset="UTF-8">
+<title>ZeroHack</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: monospace;
+  background: #0d0d0d;
+  color: #00ff9c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  text-align: center;
+  border: 1px solid #00ff9c;
+  padding: 40px;
+  box-shadow: 0 0 20px #00ff9c;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+p {
+  color: #ccc;
+}
+
+.glitch {
+  font-size: 2.5em;
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+}
+
+.glitch::before {
+  animation: glitchTop 1s infinite linear alternate-reverse;
+  color: #ff00ff;
+}
+
+.glitch::after {
+  animation: glitchBottom 1.2s infinite linear alternate-reverse;
+  color: #00ffff;
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-2px,-2px); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(2px,2px); }
+}
+</style>
 </head>
+
 <body>
-  <h1>أهلًا 👋</h1>
-  <p>موقعي شغّال على GitHub Pages 🚀</p>
+  <div class="box">
+    <h1 class="glitch" data-text="ZeroHack">ZeroHack</h1>
+    <p>Welcome to my GitHub Page</p>
+    <p>Security • Linux • Code</p>
+    <p>zeroday20</p>
+  </div>
 </body>
 </html>
